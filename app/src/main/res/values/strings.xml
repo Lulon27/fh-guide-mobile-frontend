@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FH Guide</string>
+    <string name="nav_title_modules">Module</string>
+    <string name="nav_title_timetable">Stundenpläne</string>
+</resources>

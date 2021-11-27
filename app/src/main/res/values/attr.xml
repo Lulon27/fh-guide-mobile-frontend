@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ModuleView">
+        <attr name="moduleName" format="string"/>
+        <attr name="moduleInfo" format="string"/>
+        <attr name="moduleDescription" format="string"/>
+        <attr name="moduleIcon" format="reference"/>
+    </declare-styleable>
+    <declare-styleable name="SkillView">
+        <attr name="skillName" format="string"/>
+        <attr name="skillValue" format="fraction"/>
+        <attr name="skillIcon" format="reference"/>
+        <attr name="skillColor" format="color"/>
+    </declare-styleable>
+</resources>

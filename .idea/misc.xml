@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5703125" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/ic_baseline_table_chart_24.xml" value="0.5703125" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.5703125" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.5703125" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.5703125" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_dashboard.xml" value="0.41965973534971646" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_module_details.xml" value="0.5353260869565217" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_module_item.xml" value="0.542572463768116" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_modules.xml" value="0.43072916666666666" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_notifications.xml" value="0.5541666666666667" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_timetables.xml" value="0.43072916666666666" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/layout_module_item.xml" value="0.5389492753623188" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/layout_module_item2.xml" value="0.5389492753623188" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/layout_module_view.xml" value="0.43072916666666666" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/layout/layout_skill_view.xml" value="0.40989583333333335" />
+        <entry key="..\:/Dev/AndroidStudioProjects/MyApplication/app/src/main/res/menu/bottom_nav_menu.xml" value="0.40520833333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
