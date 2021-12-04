@@ -1,15 +1,17 @@
 package de.fhguide.module;
 
+import androidx.annotation.NonNull;
+
 public class SkillRating
 {
-    private final float[] rating;
+    private final Float[] rating;
 
     public SkillRating()
     {
-        this.rating = new float[Skill.values().length];
+        this.rating = new Float[Skill.values().length];
     }
 
-    public float getRating(Skill skill)
+    public float getRating(@NonNull Skill skill)
     {
         return this.rating[skill.ordinal()];
     }
@@ -19,7 +21,17 @@ public class SkillRating
         return this.rating[skillOrd];
     }
 
-    public void setRating(Skill skill, float value)
+    public boolean isRatingSet(int skillOrd)
+    {
+        return this.rating[skillOrd] != null;
+    }
+
+    public boolean isRatingSet(Skill skill)
+    {
+        return this.rating[skill.ordinal()] != null;
+    }
+
+    public void setRating(@NonNull Skill skill, float value)
     {
         this.rating[skill.ordinal()] = value;
     }

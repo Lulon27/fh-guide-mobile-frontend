@@ -3,57 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.modules.ModulesFragment">
 
-    <ScrollView
+    <ListView
+        android:id="@+id/modulesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:clickable="true"> <!-- TODO: clickable is temporary-->
-
-        <LinearLayout
-            android:id="@+id/scroll_linear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <de.fhguide.ui.view.modules.ModuleView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:moduleName="Module name (Abbr.)"
-                app:moduleInfo="Lecturer / Other Info"
-                app:moduleDescription="Description of this module..."
-                app:moduleIcon="@drawable/placeholder_256">
-
-                <de.fhguide.ui.view.modules.SkillView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    app:skillName="Skill 1 Name"
-                    app:skillIcon="@drawable/placeholder_32"
-                    app:skillValue="50%"
-                    app:skillColor="@color/purple_200"/>
-
-                <de.fhguide.ui.view.modules.SkillView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    app:skillName="Skill 2 Name"
-                    app:skillIcon="@drawable/placeholder_32"
-                    app:skillValue="75%"
-                    app:skillColor="@android:color/holo_red_light"/>
-
-            </de.fhguide.ui.view.modules.ModuleView>
-
-        </LinearLayout>
-    </ScrollView>
+        android:layout_weight="0"/>
 
 </LinearLayout>

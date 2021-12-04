@@ -19,5 +19,8 @@ public class ModuleDetailsActivity extends AppCompatActivity
                     .replace(R.id.container, ModuleDetailsFragment.newInstance())
                     .commitNow();
         }
+
+        Bundle extras = this.getIntent().getExtras();
+        //Use extras.getInt("moduleID") to get the module
     }
 }

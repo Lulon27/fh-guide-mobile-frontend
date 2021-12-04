@@ -15,14 +15,14 @@ public class ModuleInfo
 
     private final SkillRating averageRatings;
 
-    private final Drawable icon;
+    private final int iconID;
 
-    public ModuleInfo(String name, String lecturerName, String description, Drawable icon)
+    public ModuleInfo(String name, String lecturerName, String description, int iconID)
     {
         this.name = name;
         this.lecturerName = lecturerName;
         this.description = description;
-        this.icon = icon;
+        this.iconID = iconID;
         this.averageRatings = new SkillRating();
     }
 
@@ -46,8 +46,8 @@ public class ModuleInfo
         return this.averageRatings;
     }
 
-    public Drawable getIcon()
+    public int getIconID()
     {
-        return this.icon;
+        return this.iconID;
     }
 }
