@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import de.fhguide.module.Modules;
 import de.fhguide.ui.modules.ModuleDetailsFragment;
 
 public class ModuleDetailsActivity extends AppCompatActivity
@@ -19,8 +20,5 @@ public class ModuleDetailsActivity extends AppCompatActivity
                     .replace(R.id.container, ModuleDetailsFragment.newInstance())
                     .commitNow();
         }
-
-        Bundle extras = this.getIntent().getExtras();
-        //Use extras.getInt("moduleID") to get the module
     }
 }

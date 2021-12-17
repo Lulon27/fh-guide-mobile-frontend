@@ -8,17 +8,18 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 import de.fhguide.Util;
+import de.fhguide.module.Module;
 import de.fhguide.module.ModuleInfo;
 import de.fhguide.ui.view.modules.ModuleView;
 
-public class ModulesArrayAdapter extends ArrayAdapter<ModuleInfo>
+public class ModulesArrayAdapter extends ArrayAdapter<Module>
 {
     private static class ViewHolder
     {
         private ModuleView view;
     }
 
-    public ModulesArrayAdapter(Context context, int textViewResourceId, ArrayList<ModuleInfo> items)
+    public ModulesArrayAdapter(Context context, int textViewResourceId, ArrayList<Module> items)
     {
         super(context, textViewResourceId, items);
     }
@@ -39,7 +40,7 @@ public class ModulesArrayAdapter extends ArrayAdapter<ModuleInfo>
             holder = (ViewHolder) convertView.getTag();
         }
 
-        ModuleInfo item = getItem(position);
+        ModuleInfo item = getItem(position).getOverview();
         if (item!= null) {
             holder.view.applyModuleInfo(item);
         }

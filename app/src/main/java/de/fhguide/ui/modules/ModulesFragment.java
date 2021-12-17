@@ -45,7 +45,6 @@ public class ModulesFragment extends Fragment
 
         this.modulesList.setOnItemClickListener((parent, view, pos, id) ->
         {
-            ModuleView moduleView = (ModuleView)view;
             Intent intent = new Intent(this.getActivity(), ModuleDetailsActivity.class);
 
             Bundle bundle = new Bundle();
@@ -59,13 +58,9 @@ public class ModulesFragment extends Fragment
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView()
+    {
         super.onDestroyView();
         binding = null;
-    }
-
-    public void onClick()
-    {
-
     }
 }
