@@ -1,23 +1,74 @@
 package de.fhguide.module;
 
+import android.content.Context;
 import android.util.Pair;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONObject;
+
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
 import de.fhguide.R;
+import de.fhguide.RequestHandler;
 import de.fhguide.course.Course;
 import de.fhguide.course.CourseOverview;
 
 public class Modules
 {
+    private static final String URL_GET_MODULES = "http://deerfindsadear.servebeer.com/users";
+
     private static final ArrayList<Module> modules = new ArrayList<>();
 
     static
     {
         initModules();
+    }
+
+    private static boolean modulesLoaded = false;
+    private static boolean modulesBeingLoaded = false;
+
+    public static void loadModules(Context context, Runnable onSuccess, Response.ErrorListener errorListener)
+    {
+        if(modulesLoaded)
+        {
+            throw new IllegalStateException("Modules have already been loaded");
+        }
+        if(modulesBeingLoaded)
+        {
+            throw new IllegalStateException("Modules are already being loaded");
+        }
+        modulesBeingLoaded = true;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, URL_GET_MODULES, null, new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        System.out.println(response.toString());
+                        modulesLoaded = true;
+                        modulesBeingLoaded = false;
+                        onSuccess.run();
+                    }
+                }, new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        modulesBeingLoaded = false;
+                        errorListener.onErrorResponse(error);
+                        error.printStackTrace();
+                    }
+                });
+        RequestHandler.getInstance(context).getRequestQueue().add(jsonObjectRequest);
     }
 
     private static void initModules()
