@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import de.fhguide.module.Modules;
 import de.fhguide.ui.modules.ModuleDetailsFragment;
 
 public class ModuleDetailsActivity extends AppCompatActivity
