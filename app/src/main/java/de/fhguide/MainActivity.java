@@ -6,8 +6,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import de.fhguide.database.FHGuideDatabase;
 import de.fhguide.databinding.ActivityMainBinding;
-import de.fhguide.module.Modules;
 
 public class MainActivity extends NetContentActivity
 {
@@ -27,7 +27,7 @@ public class MainActivity extends NetContentActivity
             @Override
             public void loadContent()
             {
-                Modules.loadModules(MainActivity.this, this::onSuccess, this::onError);
+                FHGuideDatabase.getInstance(MainActivity.this).loadAllModules(this::onSuccess, this::onError);
             }
         };
     }
