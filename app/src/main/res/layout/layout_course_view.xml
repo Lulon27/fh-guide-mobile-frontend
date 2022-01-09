@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Vorlesung (fett gedruckt)"
+            android:text="Vorlesung"
             android:textSize="16sp"/>
 
         <LinearLayout
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Infos (fett gedruckt)"
+            android:text="Infos"
             android:textSize="14sp"/>
 
         <TableLayout
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Benutzerdefinierte Daten (fett gedruckt)"
+            android:text="Benutzerdefinierte Daten"
             android:textSize="14sp"/>
 
         <TableLayout
