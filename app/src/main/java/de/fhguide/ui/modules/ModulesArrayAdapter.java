@@ -14,9 +14,20 @@ import de.fhguide.ui.view.modules.ModuleView;
 
 public class ModulesArrayAdapter extends ArrayAdapter<Module>
 {
-    private static class ViewHolder
+    public static class ViewHolder
     {
         private ModuleView view;
+        private Module module;
+
+        public ModuleView getModuleView()
+        {
+            return view;
+        }
+
+        public Module getModule()
+        {
+            return module;
+        }
     }
 
     public ModulesArrayAdapter(Context context, int textViewResourceId, ArrayList<Module> items)
@@ -34,6 +45,7 @@ public class ModulesArrayAdapter extends ArrayAdapter<Module>
 
             holder = new ViewHolder();
             holder.view = (ModuleView)convertView;
+            holder.module = getItem(position);
 
             convertView.setTag(holder);
         } else {

@@ -39,13 +39,13 @@ public class ModuleDetailsFragment extends Fragment {
 
         FHGuideDatabase db = FHGuideDatabase.getInstance(this.getContext());
 
-        if(moduleID == -1 || moduleID >= db.getModules().size())
+        Module module = db.getModuleByID(moduleID);
+
+        if(module == null)
         {
-            System.err.println("ModuleID is missing");
+            System.err.println("Module not found by ID " + moduleID);
             return binding.getRoot();
         }
-
-        Module module = db.getModuleByID(moduleID);
 
         binding.moduleName.setText(module.getOverview().getName());
         binding.moduleIcon.setImageDrawable(this.getResources().getDrawable(module.getOverview().getIconID(), null));
@@ -53,9 +53,12 @@ public class ModuleDetailsFragment extends Fragment {
 
         Util.createViewsFromPairList(module.getProperties(), binding.propertiesList, 4, 8);
 
-        CourseView cv = new CourseView(this.getContext());
-        cv.applyCourseInfo(module.getCourses().get(0));
-        this.binding.testCard.addView(cv);
+        if(module.getCourses().size() > 0)
+        {
+            CourseView cv = new CourseView(this.getContext());
+            cv.applyCourseInfo(module.getCourses().get(0));
+            this.binding.testCard.addView(cv);
+        }
 
         return binding.getRoot();
     }

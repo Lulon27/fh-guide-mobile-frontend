@@ -42,8 +42,10 @@ public class ModulesFragment extends Fragment
         {
             Intent intent = new Intent(this.getActivity(), ModuleDetailsActivity.class);
 
+            Module module = ((ModulesArrayAdapter.ViewHolder)view.getTag()).getModule();
+
             Bundle bundle = new Bundle();
-            bundle.putInt("moduleID", pos);
+            bundle.putInt("moduleID", module.getModuleID());
             intent.putExtras(bundle);
 
             this.requireActivity().startActivity(intent);
