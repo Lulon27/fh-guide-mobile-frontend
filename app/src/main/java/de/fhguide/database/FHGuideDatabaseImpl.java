@@ -9,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -156,8 +157,49 @@ public class FHGuideDatabaseImpl extends FHGuideDatabase
                 {
                     try
                     {
-                        Log.i("wdwdwd", response.toString());
                         loadModulesDetailsFromJSON(module, response);
+                    }
+                    catch(JSONException e)
+                    {
+                        errorListener.onErrorResponse(new VolleyError("Incorrect JSON schema"));
+                        return;
+                    }
+                    if(!module.getCourses().isEmpty())
+                    {
+                        //onSuccess is called in loadZoomInfo()
+                        loadZoomInfo(module.getCourses().get(0), onSuccess, errorListener);
+                        return;
+                    }
+                    onSuccess.run();
+                }, (error) ->
+                {
+                    errorListener.onErrorResponse(error);
+                    error.printStackTrace();
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", AUTHORIZATION);
+                return params;
+            }
+        };
+        RequestHandler.getInstance(this.getContext()).getRequestQueue().add(jsonObjectRequest);
+    }
+
+    private void loadZoomInfo(Course course, Runnable onSuccess, Response.ErrorListener errorListener)
+    {
+
+
+        final String urlZoom = "https://fh-guide.hopto.org/Course/" + course.getCourseID() + "/zoom";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.GET, urlZoom, null, (response) ->
+                {
+                    try
+                    {
+                        loadZoomInfoFromJSON(course, response);
                     }
                     catch(JSONException e)
                     {
@@ -180,6 +222,14 @@ public class FHGuideDatabaseImpl extends FHGuideDatabase
             }
         };
         RequestHandler.getInstance(this.getContext()).getRequestQueue().add(jsonObjectRequest);
+    }
+
+    private void loadZoomInfoFromJSON(Course course, JSONObject obj) throws JSONException
+    {
+        String zoomLink = obj.getString("link");
+        String zoomPw = obj.getString("password");
+        course.getOverview().getSectionCustom().getProperties().add(new Pair<>("Zoom-Link", zoomLink));
+        course.getOverview().getSectionCustom().getProperties().add(new Pair<>("Zoom-PW", zoomPw));
     }
 
     private void loadModulesDetailsFromJSON(Module module, JSONArray array) throws JSONException

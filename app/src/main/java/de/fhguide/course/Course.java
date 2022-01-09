@@ -19,4 +19,9 @@ public class Course
     {
         return this.overview;
     }
+
+    public int getCourseID()
+    {
+        return this.courseID;
+    }
 }
