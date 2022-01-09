@@ -1,6 +1,7 @@
 package de.fhguide.database;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.Pair;
 
 import com.android.volley.AuthFailureError;
@@ -27,6 +28,8 @@ import javax.net.ssl.X509TrustManager;
 
 import de.fhguide.R;
 import de.fhguide.RequestHandler;
+import de.fhguide.course.Course;
+import de.fhguide.course.CourseOverview;
 import de.fhguide.module.Module;
 import de.fhguide.module.ModuleInfo;
 
@@ -78,30 +81,22 @@ public class FHGuideDatabaseImpl extends FHGuideDatabase
     public void loadAllModules(Runnable onSuccess, Response.ErrorListener errorListener)
     {
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
-                (Request.Method.GET, URL_GET_MODULES, null, new Response.Listener<JSONArray>()
+                (Request.Method.GET, URL_GET_MODULES, null, (response) ->
                 {
-                    @Override
-                    public void onResponse(JSONArray response)
+                    try
                     {
-                        try
-                        {
-                            loadModulesFromJSON(response);
-                        }
-                        catch(JSONException e)
-                        {
-                            errorListener.onErrorResponse(new VolleyError("Incorrect JSON schema"));
-                            return;
-                        }
-                        onSuccess.run();
+                        loadModulesFromJSON(response);
                     }
-                }, new Response.ErrorListener()
+                    catch(JSONException e)
+                    {
+                        errorListener.onErrorResponse(new VolleyError("Incorrect JSON schema"));
+                        return;
+                    }
+                    onSuccess.run();
+                }, (error) ->
                 {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        errorListener.onErrorResponse(error);
-                        error.printStackTrace();
-                    }
+                    errorListener.onErrorResponse(error);
+                    error.printStackTrace();
                 })
         {
             @Override
@@ -141,6 +136,75 @@ public class FHGuideDatabaseImpl extends FHGuideDatabase
 
             module.getProperties().add(new Pair<>("Voraussetzung", moduleDeps));
             this.modules.add(module);
+        }
+    }
+
+    @Override
+    public void loadModuleDetails(int moduleID, Runnable onSuccess, Response.ErrorListener errorListener)
+    {
+        Module module = this.getModuleByID(moduleID);
+        if(module == null)
+        {
+            errorListener.onErrorResponse(new VolleyError("Module must be loaded first"));
+            return;
+        }
+
+        final String url = "https://fh-guide.hopto.org/Module/" + moduleID + "/course";
+
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
+                (Request.Method.GET, url, null, (response) ->
+                {
+                    try
+                    {
+                        Log.i("wdwdwd", response.toString());
+                        loadModulesDetailsFromJSON(module, response);
+                    }
+                    catch(JSONException e)
+                    {
+                        errorListener.onErrorResponse(new VolleyError("Incorrect JSON schema"));
+                        return;
+                    }
+                    onSuccess.run();
+                }, (error) ->
+                {
+                    errorListener.onErrorResponse(error);
+                    error.printStackTrace();
+                })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", AUTHORIZATION);
+                return params;
+            }
+        };
+        RequestHandler.getInstance(this.getContext()).getRequestQueue().add(jsonObjectRequest);
+    }
+
+    private void loadModulesDetailsFromJSON(Module module, JSONArray array) throws JSONException
+    {
+        String courseName;
+        String courseDescription;
+        String courseRoom;
+        int courseID;
+        CourseOverview overview;
+        Course course;
+        for(int i = 0; i < array.length(); ++i)
+        {
+            final JSONObject courseObj = array.getJSONObject(i);
+
+            courseName = courseObj.getString("name");
+            courseDescription = courseObj.getString("description");
+            courseRoom = courseObj.getString("room");
+            courseID = courseObj.getInt("courseId");
+
+            overview = new CourseOverview(courseName);
+            overview.getSectionMain().add(courseDescription);
+            overview.getSectionInfo().getProperties().add(new Pair<>("Raum", courseRoom));
+            course = new Course(courseID, overview);
+
+            module.getCourses().add(course);
         }
     }
 

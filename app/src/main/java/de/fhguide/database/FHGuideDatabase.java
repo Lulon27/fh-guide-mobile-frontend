@@ -45,6 +45,8 @@ public abstract class FHGuideDatabase
 
     public abstract void loadAllModules(Runnable onSuccess, Response.ErrorListener errorListener);
 
+    public abstract void loadModuleDetails(int moduleID, Runnable onSuccess, Response.ErrorListener errorListener);
+
     public abstract ArrayList<Module> getModules();
 
     public abstract Module getModuleByID(int moduleID);

@@ -89,4 +89,11 @@ public class FHGuideDatabaseDummy extends FHGuideDatabase
         }
         onSuccess.run();
     }
+
+    @Override
+    public void loadModuleDetails(int moduleID, Runnable onSuccess, Response.ErrorListener errorListener)
+    {
+        //Everything has already been loaded
+        onSuccess.run();
+    }
 }
